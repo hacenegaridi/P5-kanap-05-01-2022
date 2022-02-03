@@ -152,9 +152,9 @@ priceAmount();
 
 } // fin else : s'il y a des produits dans le panier
 
-/***********************************/
+
 //DEMANDER LES INFOS DE L'UTILISATEUR//
-/**********************************/
+
 
 // j'envoie le formulaire dans le serveur
 function postForm() {
@@ -171,43 +171,43 @@ function postForm() {
     email : document.getElementById('email').value
   }
 
-  ////
+
   // --- vérifier la validation des entrées --- //
-  ////
+
+    //contrôle prénom, test : Martin-Luther Jr. ou 陳大文 ou ñÑâê ou ации ou John D'Largy
+    function controlFirstName() {
+      const validFirstName = contact.firstName;
+      if (/^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{3,20}$/.test(validFirstName)) {
+        return true;
+      } else {
+        let firstNameErrorMsg = document.getElementById('firstNameErrorMsg');
+        firstNameErrorMsg.innerText = "Merci de vérifier le prénom, 3 caractères minimum";
+      }
+    } 
   
-  //contrôle prénom, test : Martin-Luther Jr. ou 陳大文 ou ñÑâê ou ации ou John D'Largy
-  function controlFirstName() {
-    const validFirstName = contact.firstName;
-    if (/^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{3,20}$/.test(validFirstName)) {
-      return true;
-    } else {
-      let firstNameErrorMsg = document.getElementById('firstNameErrorMsg');
-      firstNameErrorMsg.innerText = "Merci de vérifier le prénom, 3 caractères minimum";
+    // contrôle nom
+    function controlName() {
+      const validName = contact.lastName;
+      if (/^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{3,20}$/.test(validName)) {
+        return true;
+      } else {
+        let lastNameErrorMsg = document.getElementById('lastNameErrorMsg');
+        lastNameErrorMsg.innerText = "Merci de vérifier le nom, 3 caractères minimum, avec des lettres uniquement";
+      }
     }
-  } 
-
-  // contrôle nom
-  function controlName() {
-    const validName = contact.lastName;
-    if (/^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{3,20}$/.test(validName)) {
-      return true;
-    } else {
-      let lastNameErrorMsg = document.getElementById('lastNameErrorMsg');
-      lastNameErrorMsg.innerText = "Merci de vérifier le nom, 3 caractères minimum, avec des lettres uniquement";
-    }
-  }
-
-  // contrôle adresse
-  function controlAddress() {
-    const validAddress = contact.address;
-    if (/\d{2}[ ]?\d{3}$/.test(validAddress)) {
-      return true;
-    } else {
-      let addressErrorMsg = document.getElementById('addressErrorMsg');
-      addressErrorMsg.innerText = "Merci de vérifier l'adresse, alphanumérique et sans caractères spéciaux";
-    }
-  } 
-
+  
+    // contrôle adresse
+    function controlAddress() {
+      const validAddress = contact.address;
+      if (/\d{2}[ ]?\d{3}$/.test(validAddress)) {
+        return true;
+      } else {
+        let addressErrorMsg = document.getElementById('addressErrorMsg');
+        addressErrorMsg.innerText = "Merci de vérifier l'adresse, alphanumérique et sans caractères spéciaux";
+      }
+    } 
+  
+  
   // contrôle ville
   function controlCity() {
     const validAddress = contact.city;
@@ -229,13 +229,13 @@ function postForm() {
       emailErrorMsg.innerText = "Erreur ! Email non valide";
     }
   }
-  ////
+
   // --- FIN vérifier la validation des entrées --- //
-  ////
+ 
 
   // Après vérification des entrées, j'envoie l'objet contact dans le localStorage
   function validControl() {
-    if (controlFirstName() && controlName() && controlAddress() && controlCity() && controlEmail()) {
+    if (controlFirstName() && controlName() && controlCity() && controlEmail()) {
       localStorage.setItem('contact', JSON.stringify(contact));
       return true;
     } else {
